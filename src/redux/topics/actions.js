@@ -1,6 +1,7 @@
 import * as types from './types';
 import * as api from '../../api';
 import {Alert} from 'react-native';
+import {Actions} from 'react-native-router-flux';
 
 function updateList(newList, perPage) {
   console.log('actions.js 6');
@@ -60,23 +61,25 @@ export const fetchLatestTopics = () => {
         Alert.alert('Error', e.message || 'Ha ocurrido un error');
         dispatch(setLoading(false));
       });
+  };
+};
 
-    /*
-    let list = [];
-    this.setState({loading: true});
+export const postTopic = data => {
+  console.log('actions.js postTopic: ', data);
+  return (dispatch, getState) => {
+    if (data.topico === '') {
+      Alert.alert('Atención', 'Faltan datos por completar');
+      return;
+    }
 
-    api
-      .getLatestTopics()
-      .then(res => {
-        console.log('getLatestTopics res: ', res);
-        list = res.data.topic_list.topics;
-        this.setState({listTopics: list, loading: false});
-      })
-      .catch(e => {
-        this.setState({loading: false}, () => {
-          Alert.alert('Error', 'Ha ocurrido un error');
-        });
-      });
-    */
+    dispatch(setLoading(true));
+
+    for (i = 0; i < 10000; i) {
+      i = i + 1;
+    }
+
+    dispatch(fetchLatestTopics());
+    Actions.pop();
+    dispatch(setLoading(false));
   };
 };

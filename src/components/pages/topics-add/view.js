@@ -1,4 +1,5 @@
 import React from 'react';
+import {Actions, Router, Scene, Stack} from 'react-native-router-flux';
 import PropTypes from 'prop-types';
 import {
   SafeAreaView,
@@ -22,8 +23,25 @@ class TopicsAdd extends React.Component {
     };
   }
 
+  _onSubmmit = () => {
+    const {name, age, image} = this.state;
+    const {topic} = this.props;
+    console.log('topics-add view.js 29: ', topic);
+    console.log('topics-add view.js 30: ', this.props);
+    const data = {
+      topico: this.state.topicId,
+      titulo: this.state.topicTitle,
+      numPosts: this.state.postsNumber,
+      ultimoUsuarioPostear: this.state.lastPosterUsername,
+    };
+
+    this.props.postTopic(data);
+    //Actions.push('ListTopics');
+  };
+
   render() {
     const {topicId, topicTitle, postsNumber, lastPosterUsername} = this.state;
+    const {loading} = this.props;
     return (
       <SafeAreaView style={styles.container}>
         <Input
@@ -56,8 +74,8 @@ class TopicsAdd extends React.Component {
         />
         <Button
           label={'Crear Topic'}
-          loading={false}
-          onPress={() => {}}
+          loading={loading}
+          onPress={this._onSubmmit}
           style={{marginTop: 25, marginHorizontal: 25}}
         />
       </SafeAreaView>
@@ -65,6 +83,10 @@ class TopicsAdd extends React.Component {
   }
 }
 
-TopicsAdd.propTypes = {};
+TopicsAdd.propTypes = {
+  loading: PropTypes.bool,
+  topic: PropTypes.object,
+  postTopic: PropTypes.func,
+};
 
 export default TopicsAdd;
