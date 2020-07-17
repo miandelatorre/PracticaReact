@@ -8,7 +8,7 @@ import {
   Text,
   TextInput,
 } from 'react-native';
-import {Input} from '../../atoms';
+import {Input, Button} from '../../atoms';
 import styles from './styles';
 
 class TopicsAdd extends React.Component {
@@ -53,6 +53,12 @@ class TopicsAdd extends React.Component {
           onChangeText={text => this.setState({lastPosterUsername: text})}
           placeholder={'Introduce el Last Poster Username'}
           style={styles.input}
+        />
+        <Button
+          label={'Crear Topic'}
+          loading={false}
+          onPress={() => {}}
+          style={{marginTop: 25, marginHorizontal: 25}}
         />
       </SafeAreaView>
     );
