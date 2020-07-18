@@ -74,11 +74,12 @@ export const postTopic = data => {
 
     dispatch(setLoading(true));
 
+    //Loop para retardar y simular visualmente que está persistiendo el topic creado
     for (i = 0; i < 10000; i) {
       i = i + 1;
     }
 
-    dispatch(fetchLatestTopics());
+    //dispatch(fetchLatestTopics());
     Actions.pop();
     dispatch(setLoading(false));
   };
